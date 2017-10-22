@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="/assets/libs/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/assets/main.css"/>
 
     <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600italic,300' rel='stylesheet' type='text/css'>
     {% block styles %}{% endblock %}
 </head>
-<body class="has-nav">
+<body>
 
 {% block body %}{% endblock %}
 {% block footer %}{% endblock %}
 
-<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery-3.2.1.min.js"></script>
+<script src="/assets/libs/bootstrap/js/bootstrap.min.js"></script>
 
 {% block scripts %}{% endblock %}
 
@@ -25,7 +27,6 @@
 {% block portal_scripts_init %}{% endblock %}
 
 <script src="/assets/js/main.js"></script>
-
 
 </body>
 </html>

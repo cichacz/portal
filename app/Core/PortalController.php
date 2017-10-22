@@ -18,7 +18,10 @@ class PortalController {
 
     protected static $_config;
 
+    protected static $_menu = array();
+
     protected static $_urlParamRegex = '/@url-param ([a-z]+)/i';
+    protected static $_menuLabelRegex = '/@menu (.+)/i';
 
     private static $_modules = array();
 
@@ -60,6 +63,10 @@ class PortalController {
             if(empty($methodSimpleName) || !is_array($args)) {
                 return $args;
             }
+
+            //setup menu
+            $moduleName = basename(dirname(dirname($class->getFileName())));
+            $args['menu'] = self::getMenu($moduleName);
 
             //helps in generating links for current route
             $args['portal_route'] = $request->getAttribute('route')->getName();
@@ -117,7 +124,7 @@ class PortalController {
 
     public static function getRouteName($route)
     {
-        $route = preg_replace('/\[([a-z]+)\/\{\1\}\/?(?R)?\]/i', '', $route);
+        $route = preg_replace('/\[.*\]/i', '', $route);
         return Utils::nameToKey($route);
     }
 
@@ -180,9 +187,19 @@ class PortalController {
                      */
                     $docComment = $methodObj->getDocComment();
                     preg_match_all(self::$_urlParamRegex, $docComment, $params);
-                    $getAction .= self::prepareRouteParams($params[1]);
+                    preg_match(self::$_menuLabelRegex, $docComment, $menu);
 
-                    $routes[strtolower($methodType)][] = array($getAction, $controller . ':' . $methodName);
+                    $params = $params[1];
+                    if(!empty($params)) {
+                        $getAction .= self::prepareRouteParams($params, $params[0] === $methodSimpleName);
+                    }
+
+                    $route = array($getAction, $controller . ':' . $methodName);
+                    $routes[strtolower($methodType)][] = $route;
+
+                    if(!empty($menu) && strtolower($methodType) == 'get') {
+                        self::$_menu[$moduleName][$menu[1]] = PortalController::getRouteName($route[0]);
+                    }
                 }
             }
 
@@ -212,13 +229,25 @@ class PortalController {
         );
     }
 
-    protected static function prepareRouteParams($params)
+    protected static function prepareRouteParams($params, $methodAsName = false)
     {
         if(empty($params)) {
             return '';
         }
 
         $param = array_shift($params);
+        if($methodAsName) {
+            return '[{' . $param . '}/]';
+        }
+
         return '[' . $param . '/{' . $param . '}/'. self::prepareRouteParams($params) .']';
+    }
+
+    protected static function getMenu($module)
+    {
+        if(!array_key_exists($module, self::$_menu)) {
+            return array();
+        }
+        return self::$_menu[$module];
     }
 }

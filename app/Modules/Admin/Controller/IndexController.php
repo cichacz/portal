@@ -2,13 +2,17 @@
 
 namespace Portal\Modules\Admin\Controller;
 
+use Portal\Common\Model\Page;
 use Portal\Core\Curl;
 use Portal\Core\Model\PortalAuth;
 use Portal\Core\PortalController;
+use Portal\Core\PortalModel;
 
 class IndexController extends PortalController {
 
     /**
+     * @menu Lista stron
+     *
      * @param $request
      * @param $response
      * @param $args
@@ -19,6 +23,8 @@ class IndexController extends PortalController {
             $uri = self::$_router->pathFor('admin-login');
             return $response->withRedirect($uri);
         }
+
+        $args['pages'] = Page::getList();
 
         return $args;
     }
@@ -33,9 +39,6 @@ class IndexController extends PortalController {
      */
     protected function loginGetAction($request, $response, $args) {
         $args['formAction'] = self::$_router->pathFor('admin-login', $args);
-
-        $args['modules'] = PortalController::getModules();
-
         return $args;
     }
 
@@ -61,7 +64,7 @@ class IndexController extends PortalController {
         return $response->withRedirect($uri);
     }
 
-    protected function logoutGetAction($request, $response, $args) {
+    protected final function logoutGetAction($request, $response, $args) {
         PortalAuth::logout();
         $uri = self::$_router->pathFor('admin');
         return $response->withRedirect($uri);

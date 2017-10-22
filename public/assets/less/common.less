@@ -3,6 +3,64 @@ body {
 
   &.has-nav {
     padding-top: 70px;
-    padding-bottom: 70px;
+  }
+}
+
+.header {
+  height: 200px;
+  width: 100%;
+  display: table;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  h1 {
+    display: table-cell;
+    vertical-align: middle;
+    background: rgba(0,0,0,0.35);
+  }
+}
+
+.header-nav {
+  width: 100%;
+  margin: 0;
+  padding: 10px;
+
+  a {
+    color: inherit;
+    padding: 10px 15px;
+    border-radius: 0;
+    -webkit-transition: background 0.4s;
+    -moz-transition: background 0.4s;
+    -ms-transition: background 0.4s;
+    -o-transition: background 0.4s;
+    transition: background 0.4s;
+
+    &:hover, &:focus, &.active {
+      color: inherit;
+      background: rgba(0,0,0,0.3);
+    }
+  }
+
+  > li:not(:last-child) {
+    border-right: 2px solid rgba(0,0,0,0.3);
+  }
+}
+
+.page-wrapper {
+  min-height: 100vh;
+}
+
+.page-content {
+  position: relative;
+  padding: 40px 0;
+
+  .content-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.15;
   }
 }

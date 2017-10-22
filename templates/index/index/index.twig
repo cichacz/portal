@@ -1,11 +1,40 @@
 {% extends 'common/layout.twig' %}
 
 {% block body %}
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6 col-md-offset-3">
-            <h1 class="text-center">Witaj!</h1>
+    <div class="page-wrapper" style="color: {{ page.text_color }}">
+        <div class="header" style="background-image: url({{ page.image }});">
+            <h1 class="text-center">{{ page.title }}</h1>
+        </div>
+        <ul class="header-nav list-unstyled clearfix" style="background-color: {{ page.color }}">
+            <li class="pull-left">
+                <a href="/wprowadzenie" class="btn {% if page.slug == 'wprowadzenie' %}active{% endif %}">
+                    Wprowadzenie
+                </a>
+            </li>
+            <li class="pull-left">
+                <a href="/konferencja-wtwz" class="btn {% if page.slug == 'konferencja-wtwz' %}active{% endif %}">
+                    Konferencja WTwZ
+                </a>
+            </li>
+            <li class="pull-left">
+                <a href="#" class="btn">Test 3</a>
+            </li>
+            <li class="pull-left">
+                <a href="#" class="btn">Test 4</a>
+            </li>
+            <li class="pull-left">
+                <a href="#" class="btn">Test 5</a>
+            </li>
+        </ul>
+        <div class="page-content" style="color: {{ page.color }}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ page.content }}
+                    </div>
+                </div>
+            </div>
+            <div class="content-bg" style="background-color: {{ page.text_color }}"></div>
         </div>
     </div>
-</div>
 {% endblock %}

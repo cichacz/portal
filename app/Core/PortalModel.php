@@ -291,7 +291,7 @@ abstract class PortalModel {
         return $insertedId;
     }
 
-    public static function update($id = null, array $values, array $conditions) {
+    public static function update($id = null, array $values, array $conditions = array()) {
         $class = get_called_class();
 
         if($id !== null) {

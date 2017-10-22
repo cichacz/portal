@@ -2,12 +2,13 @@
 
 namespace Portal\Modules\Index\Controller;
 
+use Portal\Common\Model\Page;
 use Portal\Core\PortalController;
 
 class IndexController extends PortalController {
 
     /**
-     * @url-param return
+     * @url-param index
      *
      * @param $request
      * @param $response
@@ -15,6 +16,18 @@ class IndexController extends PortalController {
      * @return mixed
      */
     protected function indexGetAction($request, $response, $args) {
+        $page = $args['index'];
+
+        $page = Page::get(null, false, array(
+            'slug' => $page
+        ));
+
+        if(empty($page)) {
+            $page = Page::get(1);
+        }
+
+        $args['title'] = $page->title;
+        $args['page'] = $page;
 
         return $args;
     }

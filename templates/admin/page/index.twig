@@ -1,0 +1,49 @@
+{% extends 'common/layout-admin.twig' %}
+
+{% block body %}
+    {% include '_nav'|portalpartial %}
+    <form method="post" action="{{ formAction }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="title">Tytuł:</label>
+                        <input id="title" type="text" name="title" class="form-control" value="{{ page.title }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Kolor przewodni:</label>
+                        <input id="color" type="text" name="color" class="form-control" value="{{ page.color }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Kolor drugorzędny:</label>
+                        <input id="color" type="text" name="text_color" class="form-control" value="{{ page.text_color }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Zdjęcie nagłówka:</label>
+                        <input id="image" type="text" name="image" class="form-control" value="{{ page.image }}"/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <textarea id="editor" class="form-control" name="content" placeholder="Zawartość">{{ page.content }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5">
+                    <button type="submit" class="btn btn-primary btn-block">Zapisz</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/assets/libs/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: '#editor',
+            min_height: 250
+        });
+    </script>
+{% endblock %}
