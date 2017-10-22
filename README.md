@@ -1,5 +1,17 @@
 # Simple portal app
 
+## DO ZROBIENIA
+- ładniejszy html?
+- upload zdjęcia (obecnie jest url)
+- colorpicker przy wyborze kolorów w edycji strony
+
+## zastosowane technologie
+- slim framework v3
+- twig v1
+- bootstrap v3
+- jquery v3
+- tinymce najnowszy
+
 ## Wymagania
 - composer
 - php 5.5+
