@@ -8,7 +8,7 @@ function is_touch_device() {
 }
 
 function isScrolledIntoView( elem, margin, fullyVisibleCheck ){
-    if(typeof margin == 'undefined') {
+    if(typeof margin === 'undefined') {
         margin = 0;
     }
 
