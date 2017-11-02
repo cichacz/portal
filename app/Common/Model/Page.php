@@ -65,6 +65,8 @@ class Page extends PortalModel {
         ),
     );
 
+    public static $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+
     public static function save(array $items, $onDuplicate = null)
     {
         $firstItem = reset($items);
@@ -84,5 +86,15 @@ class Page extends PortalModel {
     {
         $values['slug'] = Utils::nameToKey($values['title']);
         return parent::update($id, $values, $conditions);
+    }
+
+    public static function get($id = null, $getRelated = false, array $conditions = array(), array $fields = array())
+    {
+        $item = parent::get($id, $getRelated, $conditions, $fields);
+        if(!empty($item)) {
+            $item->content = htmlspecialchars_decode($item->content, ENT_QUOTES);
+        }
+
+        return $item;
     }
 }

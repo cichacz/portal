@@ -16,7 +16,7 @@ class IndexController extends PortalController {
      * @return mixed
      */
     protected function indexGetAction($request, $response, $args) {
-        $page = $args['index'];
+        $page = !empty($args['index']) ? $args['index'] : '';
 
         $page = Page::get(null, false, array(
             'slug' => $page

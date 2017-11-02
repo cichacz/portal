@@ -10,6 +10,9 @@ use Slim\Route;
 class PortalController {
     private $_templateDir;
 
+    /* @var \Slim\Container */
+    protected static $_container;
+
     /* @var \Slim\Router */
     protected static $_router;
 
@@ -35,14 +38,17 @@ class PortalController {
 
     public function __call($method, $arguments) {
         $methodSuffix = self::$_config['controller']['methodSuffix'];
+        $class = new \ReflectionClass(get_called_class());
+
+        if(!$class->getMethod($method)->isProtected()) {
+            call_user_func_array($method, $arguments);
+        }
 
         /* @var \Slim\Http\Request $request */
         $request = $arguments[0];
 
         /* @var \Slim\Http\Response $response */
         $response = $arguments[1];
-
-        $class = new \ReflectionClass(get_called_class());
         if($class->isFinal() || $class->getMethod($method)->isFinal()) {
             //needs auth before any display
             if(!PortalAuth::isLoggedIn()) {
@@ -115,11 +121,10 @@ class PortalController {
 
     public static function setup(ContainerInterface $container)
     {
-        $settings = $container->get('settings');
-
+        static::$_container = $container;
         static::$_router = $container->get('router');
-        static::$_view = $container['view'];
-        static::$_config = $settings;
+        static::$_view = $container->get('view');
+        static::$_config = $container->get('settings');
     }
 
     public static function getRouteName($route)

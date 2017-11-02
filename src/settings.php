@@ -23,6 +23,11 @@ return [
             'methodSuffix' => 'Action'
         ],
 
+        'upload_directory' => [
+            'path' => __DIR__ . '/../public/uploads',
+            'url' => '/uploads'
+        ],
+
         'db' => [
             'host' => 'localhost',
             'name' => 'portal',

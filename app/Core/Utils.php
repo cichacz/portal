@@ -53,7 +53,7 @@ final class Utils {
     public static function removeTags($string, $removeWhitespace = false)
     {
         $string = preg_replace('@<(script|style)[^>]*?>.*?</\\1>@si', '', $string);
-        $string = strip_tags($string);
+        $string = htmlspecialchars($string, ENT_QUOTES);
 
         if ($removeWhitespace) {
             $string = preg_replace('/[\r\n\t ]+/', ' ', $string);
@@ -90,5 +90,47 @@ final class Utils {
             return $domain . '/' . $url;
         }
         return $url;
+    }
+
+    public static function fileUploadMaxSize($human = false) {
+        $max_size = -1;
+
+        if ($max_size < 0) {
+            // Start with post_max_size.
+            $post_max_size = self::_parseSize(ini_get('post_max_size'));
+            if ($post_max_size > 0) {
+                $max_size = $post_max_size;
+            }
+
+            // If upload_max_size is less, then reduce. Except if upload_max_size is
+            // zero, which indicates no limit.
+            $upload_max = self::_parseSize(ini_get('upload_max_filesize'));
+            if ($upload_max > 0 && $upload_max < $max_size) {
+                $max_size = $upload_max;
+            }
+        }
+        return $human ? self::_humanFileSize($max_size) : $max_size;
+    }
+
+    private static function _parseSize($size) {
+        $unit = preg_replace('/[^bkmgtpezy]/i', '', $size); // Remove the non-unit characters from the size.
+        $size = preg_replace('/[^0-9\.]/', '', $size); // Remove the non-numeric characters from the size.
+        if ($unit) {
+            // Find the position of the unit in the ordered string which is the power of magnitude to multiply a kilobyte by.
+            return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
+        }
+        else {
+            return round($size);
+        }
+    }
+
+    private static function _humanFileSize($size,$unit="") {
+        if( (!$unit && $size >= 1<<30) || $unit == "GB")
+            return number_format($size/(1<<30),2)."GB";
+        if( (!$unit && $size >= 1<<20) || $unit == "MB")
+            return number_format($size/(1<<20),2)."MB";
+        if( (!$unit && $size >= 1<<10) || $unit == "KB")
+            return number_format($size/(1<<10),2)."KB";
+        return number_format($size)." bytes";
     }
 }

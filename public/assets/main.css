@@ -2355,11 +2355,15 @@ body.has-nav {
   background: rgba(0, 0, 0, 0.35);
 }
 .header-nav {
+  position: relative;
+  z-index: 100;
+}
+.header-nav ul {
   width: 100%;
   margin: 0;
-  padding: 10px;
 }
-.header-nav a {
+.header-nav ul a {
+  display: block;
   color: inherit;
   padding: 10px 15px;
   border-radius: 0;
@@ -2369,14 +2373,42 @@ body.has-nav {
   -o-transition: background 0.4s;
   transition: background 0.4s;
 }
-.header-nav a:hover,
-.header-nav a:focus,
-.header-nav a.active {
+.header-nav ul a:hover,
+.header-nav ul a:focus,
+.header-nav ul a.active {
   color: inherit;
   background: rgba(0, 0, 0, 0.3);
 }
-.header-nav > li:not(:last-child) {
+.header-nav ul > li {
+  float: left;
+}
+.header-nav ul > li:not(:last-child) {
   border-right: 2px solid rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 767px) {
+  .header-nav ul > li {
+    float: none;
+    border: none !important;
+    text-align: center;
+  }
+}
+.header-nav .navbar-toggle {
+  padding: 5px 10px;
+}
+.header-nav .navbar-toggle .icon-bar {
+  background: #fff;
+}
+.header-nav .navbar-collapse {
+  padding: 0;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 767px) {
+  .header-nav .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+  }
 }
 .page-wrapper {
   min-height: 100vh;

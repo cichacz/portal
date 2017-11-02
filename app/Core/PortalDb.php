@@ -282,7 +282,7 @@ final class PortalDb {
 
                 //sanitize value
                 if(!empty($value)) {
-                    $value = strip_tags($value);
+                    $value = Utils::sanitizeText($value);
                 }
                 $values[$this->paramStr($key, $suffix++)] = $value;
                 unset($values[$key]);

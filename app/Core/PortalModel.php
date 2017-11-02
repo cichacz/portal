@@ -304,7 +304,7 @@ abstract class PortalModel {
         return PortalDb::getInstance()->update($class, $values, $conditions);
     }
 
-    public static function delete($id = null, array $conditions) {
+    public static function delete($id = null, array $conditions = array()) {
         $class = get_called_class();
 
         if($id !== null) {

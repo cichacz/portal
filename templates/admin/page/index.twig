@@ -2,6 +2,18 @@
 
 {% block body %}
     {% include '_nav'|portalpartial %}
+    {% if page %}
+        <div class="clearfix">
+            <div class="btn-group btn-group-xs pull-right">
+                <a href="#removeModal" data-toggle="modal" data-pid="{{ page.id }}" class="btn btn-danger">Usuń</a>
+                <span></span>
+            </div>
+            <div class="btn-group btn-group-xs pull-left">
+                <span></span>
+                <a href="/{{ page.title|nameToKey }}" target="_blank" class="btn btn-success">Podgląd</a>
+            </div>
+        </div>
+    {% endif %}
     <form method="post" action="{{ formAction }}">
         <div class="container">
             <div class="row">
@@ -20,7 +32,24 @@
                     </div>
                     <div class="form-group">
                         <label for="image">Zdjęcie nagłówka:</label>
-                        <input id="image" type="text" name="image" class="form-control" value="{{ page.image }}"/>
+                        <div class="input-group">
+                            <input id="image" type="text" name="image" class="form-control" value="{{ page.image }}"/>
+                            <label for="image-file" class="input-group-addon btn">
+                                <i class="fa fa-upload"></i>
+                            </label>
+                        </div>
+                        <div id="image-progress" class="progress hidden">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;">
+                                0%
+                            </div>
+                        </div>
+                        <input id="image-file" type="file" class="hidden upload"
+                               data-target="#image"
+                               data-url="{{ path_for('admin-page-image') }}"
+                               data-max-size="{{ file_size }}"
+                               accept="{{ extensions }}"
+                        />
+                        <span class="small help-block">Maksymalny rozmiar pliku: {{ file_size_human }}</span>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -36,6 +65,7 @@
             </div>
         </div>
     </form>
+    {% include '_remove'|portalpartial %}
 {% endblock %}
 
 {% block scripts %}
