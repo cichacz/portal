@@ -12,8 +12,20 @@
                             <td>
                                 {{ item.title }}
                                 <div class="btn-group-xs pull-right">
-                                    <a target="_blank" href="/{{ item.title|nameToKey }}" title="podgląd" class="btn btn-success"><i class="fa fa-search"></i></a>
+                                    <a target="_blank" href="/{{ item.slug }}" title="podgląd" class="btn btn-success"><i class="fa fa-search"></i></a>
                                     <a href="{{ path_for('admin-page', {'id': item.id}) }}" title="edycja" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                    <a href="#removeModal" data-toggle="modal" data-pid="{{ item.id }}" title="usuń" class="btn btn-danger"><i class="fa fa-close"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    {% for item in links %}
+                        <tr>
+                            <td>
+                                {{ item.title }}
+                                <div class="btn-group-xs pull-right">
+                                    <a target="_blank" href="{{ item.url }}" title="podgląd" class="btn btn-info"><i class="fa fa-link"></i></a>
+                                    <a href="{{ path_for('admin-link', {'id': item.id}) }}" title="edycja" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
                                     <a href="#removeModal" data-toggle="modal" data-pid="{{ item.id }}" title="usuń" class="btn btn-danger"><i class="fa fa-close"></i></a>
                                 </div>
                             </td>
@@ -21,8 +33,12 @@
                     {% endfor %}
                 </table>
 
-                <a class="list-group-item active text-center" href="{{ path_for('admin-page') }}">
+                <a class="btn btn-success btn-block text-center" href="{{ path_for('admin-page') }}">
                     Dodaj stronę
+                </a>
+
+                <a class="btn btn-info btn-block text-center" href="{{ path_for('admin-link') }}">
+                    Dodaj link
                 </a>
             </div>
         </div>

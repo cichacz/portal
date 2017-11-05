@@ -1,0 +1,39 @@
+{% extends 'common/layout-admin.twig' %}
+
+{% block body %}
+    {% include '_nav'|portalpartial %}
+    {% if page %}
+        <div class="clearfix">
+            <div class="btn-group btn-group-xs pull-right">
+                <a href="#removeModal" data-toggle="modal" data-pid="{{ page.id }}" class="btn btn-danger">Usuń</a>
+                <span></span>
+            </div>
+            <div class="btn-group btn-group-xs pull-left">
+                <span></span>
+                <a href="{{ page.url }}" target="_blank" class="btn btn-success">Podgląd</a>
+            </div>
+        </div>
+    {% endif %}
+    <form method="post" action="{{ formAction }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="form-group">
+                        <label for="title">Tytuł:</label>
+                        <input id="title" type="text" name="title" class="form-control" value="{{ page.title }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="url">Adres url:</label>
+                        <input id="url" type="text" name="url" class="form-control" value="{{ page.url }}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 col-md-2 col-md-offset-5">
+                    <button type="submit" class="btn btn-primary btn-block">Zapisz</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% include '_remove'|portalpartial %}
+{% endblock %}

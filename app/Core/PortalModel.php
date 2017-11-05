@@ -56,7 +56,8 @@ abstract class PortalModel {
             $conditions[$class::getTableAlias('frm_') . '.' .$pk] = $id;
         }
 
-        return reset(self::getList($getRelated, $conditions, $fields, 1));
+        $list = self::getList($getRelated, $conditions, $fields, 1);
+        return reset($list);
     }
 
     public static function getList($getRelated = false, array $conditions = array(), array $fields = array(), $limit = null, $order = null, $withDeleted = false) {

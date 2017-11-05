@@ -2,6 +2,7 @@
 
 namespace Portal\Modules\Index\Controller;
 
+use Portal\Common\Model\Link;
 use Portal\Common\Model\Page;
 use Portal\Core\PortalController;
 
@@ -22,10 +23,19 @@ class IndexController extends PortalController {
             'slug' => $page
         ));
 
-        if(empty($page)) {
-            $page = Page::get(1);
+        if($page->slug == 'wprowadzenie') {
+            $uri = self::$_router->pathFor('');
+            return $response->withRedirect($uri)->withStatus(301);
         }
 
+        if(empty($page)) {
+            $page = Page::get(null, false, array(
+                'slug' => 'wprowadzenie'
+            ));
+        }
+
+        $args['pages'] = Page::getList();
+        $args['links'] = Link::getList();
         $args['title'] = $page->title;
         $args['page'] = $page;
 

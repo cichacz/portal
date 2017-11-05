@@ -17,7 +17,6 @@ body {
   h1 {
     display: table-cell;
     vertical-align: middle;
-    background: rgba(0,0,0,0.35);
   }
 }
 
@@ -32,7 +31,7 @@ body {
     a {
       display: block;
       color: inherit;
-      padding: 10px 15px;
+      padding: 15px;
       border-radius: 0;
       -webkit-transition: background 0.4s;
       -moz-transition: background 0.4s;
@@ -47,22 +46,16 @@ body {
     }
 
     > li {
-      float: left;
-
-      &:not(:last-child) {
-        border-right: 2px solid rgba(0,0,0,0.3);
-      }
+      display: inline-block;
 
       @media(max-width: 767px) {
-        float: none;
-        border: none !important;
-        text-align: center;
+        display: block;
       }
     }
   }
 
   .navbar-toggle {
-    padding: 5px 10px;
+    padding: 10px;
 
     .icon-bar {
       background: #fff;
@@ -83,18 +76,19 @@ body {
 
 .page-wrapper {
   min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .page-content {
   position: relative;
-  padding: 40px 0;
+  background: #fff;
+  margin: 40px auto;
+  -webkit-box-shadow: 0 0 10px #000;
+  -moz-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+}
 
-  .content-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.15;
-  }
+.page-text {
+  padding: 40px;
 }

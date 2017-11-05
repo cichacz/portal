@@ -2,6 +2,7 @@
 
 namespace Portal\Modules\Admin\Controller;
 
+use Portal\Common\Model\Link;
 use Portal\Common\Model\Page;
 use Portal\Core\Curl;
 use Portal\Core\Model\PortalAuth;
@@ -25,6 +26,7 @@ class IndexController extends PortalController {
         }
 
         $args['pages'] = Page::getList();
+        $args['links'] = Link::getList();
 
         return $args;
     }

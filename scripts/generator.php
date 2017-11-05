@@ -12,3 +12,7 @@ if(PortalAuth::updateSchema()) {
 if(Page::updateSchema()) {
     echo "Page schema updated \n";
 }
+
+if(\Portal\Common\Model\Link::updateSchema()) {
+    echo "Link schema updated \n";
+}
