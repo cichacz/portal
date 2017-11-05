@@ -4,7 +4,7 @@
 - ładniejszy html?
 - ~~upload zdjęcia (obecnie jest url)~~
 - colorpicker przy wyborze kolorów w edycji strony
-- elementy w menu ładowane dynamicznie
+- ~~elementy w menu ładowane dynamicznie~~
 
 ## zastosowane technologie
 - slim framework v3
@@ -22,8 +22,9 @@
 ## Instalacja
 - apache + php + mysql (we własnym zakresie)
 - composer wg. instrukcji: [https://getcomposer.org/]()
-- dodanie vhosta do apache (poniżej)
 - komenda "composer install"
+- dodanie vhosta do apache (poniżej)
+- dodanie do pliku /etc/hoosts wpisu 127.0.0.1 portal.dev
 - stworzenie bazy "portal" i import struktury z pliku _db/portal.sql.zip
 
 ### vhost
