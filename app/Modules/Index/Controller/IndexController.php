@@ -23,15 +23,13 @@ class IndexController extends PortalController {
             'slug' => $page
         ));
 
-        if($page->slug == 'wprowadzenie') {
-            $uri = self::$_router->pathFor('');
-            return $response->withRedirect($uri)->withStatus(301);
-        }
-
         if(empty($page)) {
             $page = Page::get(null, false, array(
                 'slug' => 'wprowadzenie'
             ));
+        } elseif($page->slug == 'wprowadzenie') {
+            $uri = self::$_router->pathFor('');
+            return $response->withRedirect($uri)->withStatus(301);
         }
 
         $args['pages'] = Page::getList();

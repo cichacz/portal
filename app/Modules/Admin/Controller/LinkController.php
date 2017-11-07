@@ -3,12 +3,7 @@
 namespace Portal\Modules\Admin\Controller;
 
 use Portal\Common\Model\Link;
-use Portal\Common\Model\Page;
 use Portal\Core\PortalController;
-use Portal\Core\Utils;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Slim\Http\UploadedFile;
 
 final class LinkController extends PortalController
 {
@@ -24,7 +19,7 @@ final class LinkController extends PortalController
      */
     protected function indexGetAction($request, $response, $args)
     {
-        $args['formAction'] = self::$_router->pathFor('admin-link-save', $args);
+        $args['formAction'] = self::$_router->pathFor('admin-link', $args);
 
         if(isset($args['id'])) {
             $id = (int)$args['id'];
@@ -67,7 +62,7 @@ final class LinkController extends PortalController
      * @param $args
      * @return mixed
      */
-    protected function savePostAction($request, $response, $args)
+    protected function indexPostAction($request, $response, $args)
     {
         $formVars = $request->getParsedBody();
         if(isset($args['id'])) {
@@ -78,8 +73,8 @@ final class LinkController extends PortalController
         }
 
         $args['id'] = $id;
+        $args['notification'] = array('success' => 'Zapisano zmiany');
 
-        $uri = self::$_router->pathFor('admin-link', $args);
-        return $response->withRedirect($uri);
+        return $this->indexGetAction($request, $response, $args);
     }
 }

@@ -2408,6 +2408,7 @@ body.has-nav {
   min-height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .page-content {
   position: relative;
@@ -2416,6 +2417,10 @@ body.has-nav {
   -webkit-box-shadow: 0 0 10px #000;
   -moz-box-shadow: 0 0 10px #000;
   box-shadow: 0 0 10px #000;
+}
+.page-content img {
+  max-width: 100%;
+  height: auto;
 }
 .page-text {
   padding: 40px;

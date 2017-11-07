@@ -25,6 +25,7 @@ class PortalController {
 
     protected static $_urlParamRegex = '/@url-param ([a-z]+)/i';
     protected static $_menuLabelRegex = '/@menu (.+)/i';
+    protected static $_menuOrderRegex = '/@menu-order ([0-9]+)/i';
 
     private static $_modules = array();
 
@@ -42,6 +43,7 @@ class PortalController {
 
         if(!$class->getMethod($method)->isProtected()) {
             call_user_func_array($method, $arguments);
+            return;
         }
 
         /* @var \Slim\Http\Request $request */
@@ -193,6 +195,7 @@ class PortalController {
                     $docComment = $methodObj->getDocComment();
                     preg_match_all(self::$_urlParamRegex, $docComment, $params);
                     preg_match(self::$_menuLabelRegex, $docComment, $menu);
+                    preg_match(self::$_menuOrderRegex, $docComment, $menuOrder);
 
                     $params = $params[1];
                     if(!empty($params)) {
@@ -203,7 +206,18 @@ class PortalController {
                     $routes[strtolower($methodType)][] = $route;
 
                     if(!empty($menu) && strtolower($methodType) == 'get') {
-                        self::$_menu[$moduleName][$menu[1]] = PortalController::getRouteName($route[0]);
+                        if(!array_key_exists($moduleName, self::$_menu)) {
+                            self::$_menu[$moduleName] = array();
+                        }
+
+                        if(empty($menuOrder)) {
+                            $menuOrder = count(self::$_menu[$moduleName]);
+                        } else {
+                            $menuOrder = $menuOrder[1];
+                        }
+
+                        $menuItem = array(PortalController::getRouteName($route[0]) => $menu[1]);
+                        array_splice(self::$_menu[$moduleName], $menuOrder, 0, array($menuItem));
                     }
                 }
             }
@@ -253,6 +267,6 @@ class PortalController {
         if(!array_key_exists($module, self::$_menu)) {
             return array();
         }
-        return self::$_menu[$module];
+        return call_user_func_array('array_merge', self::$_menu[$module]);
     }
 }

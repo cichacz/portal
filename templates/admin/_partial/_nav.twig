@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse" id="admin-nav-menu">
             <ul class="nav navbar-nav">
-                {% for item,path in menu %}
+                {% for path,item in menu %}
                     <li>
                         <a href="{{ path_for(path) }}">
                             {{ item }}

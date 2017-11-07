@@ -4,15 +4,14 @@ namespace Portal\Modules\Admin\Controller;
 
 use Portal\Common\Model\Link;
 use Portal\Common\Model\Page;
-use Portal\Core\Curl;
 use Portal\Core\Model\PortalAuth;
 use Portal\Core\PortalController;
-use Portal\Core\PortalModel;
 
 class IndexController extends PortalController {
 
     /**
-     * @menu Lista stron
+     * @menu Lista elementów
+     * @menu-order 0
      *
      * @param $request
      * @param $response

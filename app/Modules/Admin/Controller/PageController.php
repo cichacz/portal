@@ -15,6 +15,7 @@ final class PageController extends PortalController
      * @url-param id
      *
      * @menu Dodaj stronę
+     * @menu-order 1
      *
      * @param $request
      * @param $response
@@ -23,7 +24,7 @@ final class PageController extends PortalController
      */
     protected function indexGetAction($request, $response, $args)
     {
-        $args['formAction'] = self::$_router->pathFor('admin-page-save', $args);
+        $args['formAction'] = self::$_router->pathFor('admin-page', $args);
 
         if(isset($args['id'])) {
             $id = (int)$args['id'];
@@ -73,7 +74,7 @@ final class PageController extends PortalController
      * @param $args
      * @return mixed
      */
-    protected function savePostAction($request, $response, $args)
+    protected function indexPostAction($request, $response, $args)
     {
         $formVars = $request->getParsedBody();
         if(isset($args['id'])) {
@@ -84,9 +85,9 @@ final class PageController extends PortalController
         }
 
         $args['id'] = $id;
+        $args['notification'] = array('success' => 'Zapisano zmiany');
 
-        $uri = self::$_router->pathFor('admin-page', $args);
-        return $response->withRedirect($uri);
+        return $this->indexGetAction($request, $response, $args);
     }
 
     protected function imagePostAction(Request $request, Response $response, $args) {
@@ -94,7 +95,7 @@ final class PageController extends PortalController
         $uploadedFiles = $request->getUploadedFiles();
 
         // handle single input with single file upload
-        $uploadedFile = $uploadedFiles['image-file'];
+        $uploadedFile = $uploadedFiles['file'];
 
         $extension = pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
         if(! in_array($extension, Page::$allowedExtensions)) {
@@ -103,7 +104,7 @@ final class PageController extends PortalController
 
         if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
             $filename = $this->_moveUploadedFile($directory, $uploadedFile);
-            return $response->write(self::$_config['upload_directory']['url'] . '/' . $filename);
+            return $this->json($response, array('location' => self::$_config['upload_directory']['url'] . '/' . $filename));
         }
 
         return $response->withStatus(500);

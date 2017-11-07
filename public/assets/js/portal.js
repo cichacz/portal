@@ -49,7 +49,7 @@ function initUploaders() {
         }
 
         var formData = new FormData();
-        formData.append('image-file', file);
+        formData.append('file', file);
 
         var $this = $(this);
         var fileUrlInput = $($this.data('target'));
@@ -71,7 +71,12 @@ function initUploaders() {
 
         xhr.onload = function () {
             if (xhr.status === 200) {
-                fileUrlInput.val(this.response);
+                try {
+                    var data = JSON.parse(this.response);
+                    fileUrlInput.val(data.location);
+                } catch(e) {
+
+                }
             } else {
                 alert("Wystąpił błąd podczas przesyłania");
             }
