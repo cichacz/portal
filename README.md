@@ -3,7 +3,7 @@
 ## DO ZROBIENIA
 - ładniejszy html?
 - ~~upload zdjęcia (obecnie jest url)~~
-- colorpicker przy wyborze kolorów w edycji strony
+- ~~colorpicker przy wyborze kolorów w edycji strony~~
 - ~~elementy w menu ładowane dynamicznie~~
 
 ## zastosowane technologie
