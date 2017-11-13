@@ -23,14 +23,6 @@
                         <input id="title" type="text" name="title" class="form-control" value="{{ page.title }}"/>
                     </div>
                     <div class="form-group">
-                        <label for="color">Kolor przewodni:</label>
-                        <input type="text" name="color" class="form-control color" value="{{ page.color }}"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="color">Kolor drugorzędny:</label>
-                        <input type="text" name="text_color" class="form-control color" value="{{ page.text_color }}"/>
-                    </div>
-                    <div class="form-group">
                         <label for="image">Zdjęcie nagłówka:</label>
                         <div class="input-group">
                             <input id="image" type="text" name="image" class="form-control" value="{{ page.image }}"/>
@@ -50,6 +42,14 @@
                                accept="{{ extensions }}"
                         />
                         <span class="small help-block">Maksymalny rozmiar pliku: {{ file_size_human }}</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Kolor przewodni:</label>
+                        <input type="text" name="color" class="form-control color" value="{{ page.color }}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Kolor drugorzędny:</label>
+                        <input type="text" name="text_color" class="form-control color" value="{{ page.text_color }}"/>
                     </div>
                 </div>
                 <div class="col-md-8">
