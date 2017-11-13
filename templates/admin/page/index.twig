@@ -24,11 +24,11 @@
                     </div>
                     <div class="form-group">
                         <label for="color">Kolor przewodni:</label>
-                        <input id="color" type="text" name="color" class="form-control" value="{{ page.color }}"/>
+                        <input type="text" name="color" class="form-control color" value="{{ page.color }}"/>
                     </div>
                     <div class="form-group">
                         <label for="color">Kolor drugorzędny:</label>
-                        <input id="color" type="text" name="text_color" class="form-control" value="{{ page.text_color }}"/>
+                        <input type="text" name="text_color" class="form-control color" value="{{ page.text_color }}"/>
                     </div>
                     <div class="form-group">
                         <label for="image">Zdjęcie nagłówka:</label>
@@ -69,6 +69,9 @@
 {% endblock %}
 
 {% block scripts %}
+    <script type="text/javascript">
+        $('.color').colorPicker();
+    </script>    
     <script src="/assets/libs/tinymce/tinymce.min.js"></script>
     <script>
         tinymce.init({
