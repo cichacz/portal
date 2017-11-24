@@ -52,6 +52,13 @@ class Page extends PortalModel {
             'is_nullable' => PortalDb::NULLABLE,
             'extra' => ''
         ),
+        'logo' => array(
+            'column_name' => 'logo',
+            'column_type' => 'varchar(255)',
+            'column_default' => null,
+            'is_nullable' => PortalDb::NULLABLE,
+            'extra' => ''
+        ),
         'content' => array(
             'column_name' => 'content',
             'column_type' => 'text',

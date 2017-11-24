@@ -15,8 +15,32 @@ body {
   position: relative;
 
   h1 {
-    display: table-cell;
+    display: block;
     vertical-align: middle;
+  }
+
+  .logo-img {
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+    width: auto;
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      display: table-cell;
+    }
+
+    .logo-img {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
   }
 }
 
