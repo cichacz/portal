@@ -2348,31 +2348,17 @@ body.has-nav {
   background-size: cover;
   background-position: center;
   position: relative;
+  padding: 20px 0;
 }
 .header h1 {
-  display: block;
+  display: table-cell;
   vertical-align: middle;
 }
 .header .logo-img {
   display: block;
-  margin: 0 auto;
-  height: 150px;
-  width: auto;
-}
-@media (min-width: 768px) {
-  .header h1 {
-    display: table-cell;
-  }
-  .header .logo-img {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
+  margin: 0 auto 30px;
+  max-width: 300px;
+  height: auto;
 }
 .header-nav {
   position: relative;

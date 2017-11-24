@@ -21,6 +21,8 @@ foreach($it as $file) {
 
 PortalController::setup($app->getContainer());
 
+sort($controllers);
+
 foreach($controllers as $controller) {
     $controllerInfo = PortalController::getControllerInfo($controller);
 

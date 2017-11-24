@@ -5,12 +5,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <div class="page-content" style="color: {{ page.color }}">
-                        <div class="header" style="">
-                            <h1 class="text-center">{{ page.title }}</h1>
-                            {% if page.logo %}
-                                <img src="{{ page.logo }}" class="logo-img"/>
-                            {% endif %}
+                    <div class="page-content">
+                        <div class="header" style="color: {{ page.color }}">
+                            <h1 class="text-center">
+                                {% if page.logo %}
+                                    <img src="{{ page.logo }}" class="logo-img"/>
+                                {% endif %}
+                                {{ page.title }}
+                            </h1>
                         </div>
                         <div class="header-nav clearfix" style="background: {{ page.color }};
 background: -moz-linear-gradient(-45deg, {{ page.color }} 0%,{{ page.text_color }} 100%);
